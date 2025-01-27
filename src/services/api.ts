@@ -3,6 +3,7 @@ export const sendMessage = async (
   message: string
 ): Promise<void> => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  console.log("pasoo");
 
   const response = await fetch(`${apiUrl}/general/send-message`, {
     method: "POST",

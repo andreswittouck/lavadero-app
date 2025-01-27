@@ -1,88 +1,93 @@
 import React, { useState } from "react";
 import { Client } from "../../types/client";
+import styles from "./ClientForm.module.css";
 
 interface ClientFormProps {
-  onAddClient: (client: Client) => void; // Define el tipo para la función onAddClient
+  onAddClient: (client: Client) => void;
 }
+
+const useCarForm = () => {
+  const [cars, setCars] = useState([{ make: "", model: "", year: "" }]);
+
+  const addCar = () => {
+    setCars([...cars, { make: "", model: "", year: "" }]);
+  };
+
+  const updateCar = (index: number, key: string, value: string) => {
+    setCars((prev) =>
+      prev.map((car, i) => (i === index ? { ...car, [key]: value } : car))
+    );
+  };
+
+  return { cars, addCar, updateCar };
+};
 
 const ClientForm: React.FC<ClientFormProps> = ({ onAddClient }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [cars, setCars] = useState([{ make: "", model: "", year: undefined }]);
-
-  const handleAddCar = () => {
-    setCars([...cars, { make: "", model: "", year: undefined }]);
-  };
+  const { cars, addCar, updateCar } = useCarForm();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Crear un objeto Client
     const newClient: Client = {
       name,
-      phone: phone,
-      vehicle: cars.map((car, index) => ({
+      phone,
+      vehicle: cars.map((car) => ({
         make: car.make,
         model: car.model,
-        year: car.year, // Año del auto
+        year: car.year ? parseInt(car.year, 10) : undefined, // Convertir a número
       })),
     };
-
-    onAddClient(newClient); // Llama a la función para agregar el cliente
+    onAddClient(newClient);
     setName("");
     setPhone("");
-    setCars([{ make: "", model: "", year: undefined }]);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Nombre del cliente"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="tel"
-        placeholder="Teléfono"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        required
-      />
-      <h3>Autos</h3>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label>
+        Nombre:
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+      <label>
+        Teléfono:
+        <input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+      </label>
+      <h3>Autos:</h3>
       {cars.map((car, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder="Marca"
-            value={car.make}
-            onChange={(e) =>
-              setCars(
-                cars.map((c, i) =>
-                  i === index ? { ...c, make: e.target.value } : c
-                )
-              )
-            }
-            required
-          />
-          <input
-            type="text"
-            placeholder="Modelo"
-            value={car.model}
-            onChange={(e) =>
-              setCars(
-                cars.map((c, i) =>
-                  i === index ? { ...c, model: e.target.value } : c
-                )
-              )
-            }
-            required
-          />
+        <div key={index} className={styles.car}>
+          <label>
+            Marca:
+            <input
+              type="text"
+              value={car.make}
+              onChange={(e) => updateCar(index, "make", e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Modelo:
+            <input
+              type="text"
+              value={car.model}
+              onChange={(e) => updateCar(index, "model", e.target.value)}
+              required
+            />
+          </label>
         </div>
       ))}
-      <button type="button" onClick={handleAddCar}>
-        Agregar otro auto
+      <button type="button" onClick={addCar}>
+        Agregar Auto
       </button>
       <button type="submit">Agregar Cliente</button>
     </form>
