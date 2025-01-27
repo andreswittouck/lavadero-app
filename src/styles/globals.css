@@ -1,0 +1,140 @@
+/* src/styles/globals.css */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login-button {
+  padding: 10px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #005bb5;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+/* src/styles/globals.css */
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.login-form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.login-form .error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* src/styles/globals.css */
+.client-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.car-input {
+  display: flex;
+  gap: 10px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
