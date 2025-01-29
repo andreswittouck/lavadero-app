@@ -1,7 +1,10 @@
 import { Vehicle } from "./vehicle";
 
 export interface Client {
-  name: string; // Nombre del cliente
-  phone: string; // Número de teléfono
-  vehicle: Vehicle[]; // Lista de autos asociados al cliente
+  id: number;
+  name: string;
+  phone: string;
+  email?: string;
+  vehicle?: Vehicle[];
+  createdAt: Date;
 }

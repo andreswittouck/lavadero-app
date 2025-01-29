@@ -1,0 +1,24 @@
+.userManager {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clientList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.clientCard {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  width: 250px;
+}

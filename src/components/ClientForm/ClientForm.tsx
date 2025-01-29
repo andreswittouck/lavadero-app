@@ -9,9 +9,7 @@ interface ClientFormProps {
 const useCarForm = () => {
   const [cars, setCars] = useState([{ make: "", model: "", year: "" }]);
 
-  const addCar = () => {
-    setCars([...cars, { make: "", model: "", year: "" }]);
-  };
+  const addCar = () => setCars([...cars, { make: "", model: "", year: "" }]);
 
   const updateCar = (index: number, key: string, value: string) => {
     setCars((prev) =>
@@ -35,7 +33,7 @@ const ClientForm: React.FC<ClientFormProps> = ({ onAddClient }) => {
       vehicle: cars.map((car) => ({
         make: car.make,
         model: car.model,
-        year: car.year ? parseInt(car.year, 10) : undefined, // Convertir a número
+        year: car.year ? parseInt(car.year, 10) : undefined,
       })),
     };
     onAddClient(newClient);
@@ -82,6 +80,14 @@ const ClientForm: React.FC<ClientFormProps> = ({ onAddClient }) => {
               value={car.model}
               onChange={(e) => updateCar(index, "model", e.target.value)}
               required
+            />
+          </label>
+          <label>
+            Año:
+            <input
+              type="number"
+              value={car.year}
+              onChange={(e) => updateCar(index, "year", e.target.value)}
             />
           </label>
         </div>

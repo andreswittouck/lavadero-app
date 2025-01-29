@@ -1,35 +1,75 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../context/AuthContext";
-import ClientFormWrapper from "../../components/ClientForm";
+import React, { useState, useEffect } from "react";
 import ClientList from "../../components/ClientList/ClientList";
-import useClients from "../../utils/useClients"; // Custom hook para manejo de clientes
-import styles from "./HomePage.module.css";
+import VehicleList from "../../components/VehicleList/VehicleList";
+import UserManager from "../../components/UserManager/UserManager";
 
-const HomePage = () => {
-  const { user, loading } = useAuth();
-  const router = useRouter();
-  const { clients, addClient } = useClients(); // Hook para manejar estado de clientes
+import { Client } from "../../types/client";
+import styles from "./Home.module.css";
+import {
+  addClient,
+  deleteClient,
+  fetchClients,
+  updateClient,
+} from "../../services/api/clients";
+
+const Home: React.FC = () => {
+  const [clients, setClients] = useState<Client[]>([]);
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login");
-    }
-  }, [user, loading, router]);
+    const loadClients = async () => {
+      try {
+        const data = await fetchClients();
+        setClients(data);
+      } catch (error) {
+        console.error("Error al cargar los clientes:", error);
+      }
+    };
 
-  if (loading) {
-    return <div className={styles.loading}>Cargando...</div>;
-  }
+    loadClients();
+  }, []);
+
+  const handleAddClient = async (client: Client) => {
+    try {
+      const newClient = await addClient(client);
+      setClients((prev) => [...prev, newClient]);
+    } catch (error) {
+      console.error("Error al agregar el cliente:", error);
+    }
+  };
+
+  const handleUpdateClient = async (id: number, client: Partial<Client>) => {
+    try {
+      const updatedClient = await updateClient(id, client);
+      setClients((prev) =>
+        prev.map((c) => (c.id === updatedClient.id ? updatedClient : c))
+      );
+    } catch (error) {
+      console.error("Error al actualizar el cliente:", error);
+    }
+  };
+
+  const handleDeleteClient = async (id: number) => {
+    try {
+      await deleteClient(id);
+      setClients((prev) => prev.filter((c) => c.id !== id));
+    } catch (error) {
+      console.error("Error al eliminar el cliente:", error);
+    }
+  };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Bienvenido al Lavadero</h1>
-      <ClientFormWrapper onAddClient={addClient} />
-      <ClientList clients={clients} />
+    <div>
+      <h1>Gestión de Clientes</h1>
+      <UserManager
+        clients={clients}
+        onAdd={handleAddClient}
+        onUpdate={handleUpdateClient}
+        onDelete={handleDeleteClient}
+      />
     </div>
   );
 };
 
-export default HomePage;
+export default Home;
