@@ -3,7 +3,7 @@ import { Client } from "../../types/client";
 import styles from "./ClientForm.module.css";
 
 interface ClientFormProps {
-  onAddClient: (client: Client) => void;
+  onAddClient: (client: Omit<Client, "id" | "createdAt">) => void;
 }
 
 const useCarForm = () => {
@@ -27,7 +27,7 @@ const ClientForm: React.FC<ClientFormProps> = ({ onAddClient }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newClient: Client = {
+    const newClient: Omit<Client, "id" | "createdAt"> = {
       name,
       phone,
       vehicle: cars.map((car) => ({

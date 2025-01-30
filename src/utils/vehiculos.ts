@@ -1,4 +1,4 @@
-import { db } from "./firebaseConfig";
+import { db } from "../app/utils/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 // Función para agregar un vehículo

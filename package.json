@@ -9,19 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "chromedriver": "^128.0.0",
     "dotenv": "^16.4.5",
     "firebase": "^10.13.0",
     "next": "14.2.7",
     "next-pwa": "^5.6.0",
     "npm": "^10.8.3",
-    "puppeteer": "^23.2.1",
     "react": "^18",
     "react-dom": "^18",
-    "selenium-webdriver": "^4.24.0",
     "twilio": "^5.2.3"
   },
   "devDependencies": {
+    "chromedriver": "^128.0.0",
+    "puppeteer": "^23.2.1",
+    "selenium-webdriver": "^4.24.0",
     "@types/next-pwa": "^5.6.9",
     "@types/node": "^20.16.2",
     "@types/react": "^18.3.4",

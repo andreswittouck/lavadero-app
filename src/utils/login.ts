@@ -1,4 +1,4 @@
-import { auth } from "./firebaseConfig";
+import { auth } from "../app/utils/firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,

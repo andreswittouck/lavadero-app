@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import ClientList from "../../components/client-list/client-list";
-import VehicleList from "../../components/VehicleList/VehicleList";
 import UserManager from "../../components/UserManager/UserManager";
-
 import { Client } from "../../types/client";
 import styles from "./HomePage.module.css";
 import {
@@ -18,18 +15,20 @@ import { auth } from "../utils/firebaseConfig";
 export default function HomePage() {
   const [clients, setClients] = useState<Client[]>([]);
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  if (!user) return <p>Loading...</p>;
-
   useEffect(() => {
+    if (!user) return;
+
     const loadClients = async () => {
       try {
         const data = await fetchClients();
@@ -40,7 +39,7 @@ export default function HomePage() {
     };
 
     loadClients();
-  }, []);
+  }, [user]);
 
   const handleAddClient = async (client: Client) => {
     try {
@@ -70,6 +69,10 @@ export default function HomePage() {
       console.error("Error al eliminar el cliente:", error);
     }
   };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
