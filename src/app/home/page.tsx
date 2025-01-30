@@ -1,21 +1,33 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import ClientList from "../../components/ClientList/ClientList";
+import ClientList from "../../components/client-list/client-list";
 import VehicleList from "../../components/VehicleList/VehicleList";
 import UserManager from "../../components/UserManager/UserManager";
 
 import { Client } from "../../types/client";
-import styles from "./Home.module.css";
+import styles from "./HomePage.module.css";
 import {
   addClient,
   deleteClient,
   fetchClients,
   updateClient,
 } from "../../services/api/clients";
+import { auth } from "../utils/firebaseConfig";
 
-const Home: React.FC = () => {
+export default function HomePage() {
   const [clients, setClients] = useState<Client[]>([]);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (!user) return <p>Loading...</p>;
 
   useEffect(() => {
     const loadClients = async () => {
@@ -70,6 +82,4 @@ const Home: React.FC = () => {
       />
     </div>
   );
-};
-
-export default Home;
+}

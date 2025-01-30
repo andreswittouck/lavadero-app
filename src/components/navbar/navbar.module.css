@@ -1,0 +1,59 @@
+.navbar {
+  position: fixed; /* Fija el Navbar en la parte superior */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Asegura que esté sobre otros elementos */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo h1 {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navLinks li {
+  display: inline;
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+}
+
+.navLinks a:hover {
+  text-decoration: underline;
+}
+
+.logout {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: darkred;
+}
+/* 
+main {
+  padding-top: 70px; /* Agrega un margen para evitar que los componentes queden debajo del Navbar 
+} 
+ */

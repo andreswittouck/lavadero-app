@@ -1,0 +1,74 @@
+/* src/app/login/login.module.css */
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.monster {
+  display: block;
+  margin: 0 auto;
+  width: 230px;
+  height: auto;
+  transition: transform 0.2s ease-in-out;
+}
+
+.formulario {
+  width: 400px;
+  background-color: #fff;
+  border: 5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 30px 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.formulario input,
+.formulario label,
+.formulario button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.formulario input {
+  height: 40px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0 8px;
+}
+
+.formulario button {
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  height: 40px;
+  background-color: var(--button-bg);
+  box-shadow: 1px 1px 2px #000;
+  color: #fff;
+}
+
+.formulario button:hover {
+  background-color: var(--button-hover);
+}
+
+.register {
+  margin-top: 20px; /* Espacio entre el formulario y el texto de registro */
+  text-align: center;
+  font-size: 14px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
